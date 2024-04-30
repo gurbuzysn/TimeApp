@@ -2,52 +2,46 @@
 @{
     ViewData["Title"] = "Title";
 }
-
-
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Time</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12" style="font-size:15em;">
-                <h1>Time</h1>
-                <p id="time">@Model.ToString("hh:mm:ss")</p>
-            </div>
+<div class="container text-center">
+    <div class="row bg-warning rounded-5">
+        <div class="col-md-12" style="font-size:7em;">
+            <h1>Time</h1>
+            <p id="time">@Model.ToString("hh:mm:ss")</p>
         </div>
     </div>
+    
+</div>
 
-
-
-
+@section Scripts
+    {
     <script>
-
         let time = document.getElementById("time");
-
-        const refrestTime = () => {
+        const refreshTime = () => {
             let date = new Date();
             time.innerHTML = date.toLocaleTimeString();
+
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+
+            
+            if (min === 0 && sec === 00) 
+            {
+                new Audio("/assets/sounds/WorkStart.mp3").play();
+            }
+            else if (min === 3 && sec === 00) 
+            {
+                new Audio("/assets/sounds/BreakTime.mp3").play();
+                playMusic();
+            }
         }
-
         setInterval(() => {
-            refrestTime();
+            refreshTime();
         }, 1000);
-
-
     </script>
-
-</body>
-</html>
+    }
 
 
-   
+
 
 
 
