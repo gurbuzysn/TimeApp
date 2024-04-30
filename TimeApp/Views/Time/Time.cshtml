@@ -1,6 +1,7 @@
 ﻿@model DateTime
 @{
     ViewData["Title"] = "Title";
+    int goalTime = 45;
 }
 <div class="container text-center">
     <div class="row bg-warning rounded-5">
@@ -11,6 +12,9 @@
     </div>
     
 </div>
+
+<h1>Hedef Zaman: @goalTime</h1>
+
 
 @section Scripts
     {
@@ -28,7 +32,7 @@
             {
                 new Audio("/assets/sounds/WorkStart.mp3").play();
             }
-            else if (min === 20 && sec === 00) 
+            else if (min === @goalTime && sec === 00) 
             {
                 new Audio("/assets/sounds/BreakTime15Min.mp3").play();
                 playMusic();
